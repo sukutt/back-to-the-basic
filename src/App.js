@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, createContext } from 'react';
+import Counter from './Counter';
+import Info from './Info';
+import LeftPane from './components/LeftPane';
+import RightPane from './components/RightPane';
+import { SampleProvider } from './contexts/sample';
 
-function App() {
+const ThemeContext = createContext('black');
+const App = () => {
+  const [visible, setVisible] = useState(false);
+
+  // return (
+  //   <div>
+  //     <button
+  //       onClick={() => {
+  //         setVisible(!visible);
+  //       }}
+  //       >
+  //         {visible ? '숨기기' : '보이기'}
+  //     </button>
+  //     <hr />
+  //     {visible && <Info />}
+  //   </div>
+  // )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <main className='main'>
+      <aside className='filter-aside'>
+        사이드바
+        <section className='filter-container'>
+          <div>
+            input range 1
+          </div>
+          <div>
+            input range 1
+          </div>
+          <div>
+            check boxes
+          </div>
+        </section>
+      </aside>
+      <section className='center-section'>
+        메인 컨텐츠
+      </section>
+    </main>
+  )
 }
 
 export default App;
