@@ -4,10 +4,11 @@ import Info from './Info';
 import LeftPane from './components/LeftPane';
 import RightPane from './components/RightPane';
 import { SampleProvider } from './contexts/sample';
+import CenterPane from './components/CenterPane'
 
 const ThemeContext = createContext('black');
 const App = () => {
-  const [visible, setVisible] = useState(false);
+  // const [visible, setVisible] = useState(false);
 
   // return (
   //   <div>
@@ -39,9 +40,7 @@ const App = () => {
           </div>
         </section>
       </aside>
-      <section className='center-section'>
-        메인 컨텐츠
-      </section>
+      <CenterPane />
     </main>
   )
 }
