@@ -4,19 +4,43 @@ import WebtoonList from './WebtoonList'
 
 class CenterPane extends React.Component {
     state = {
-        webtoonList: []
+        webtoonList: [],
+        pageNumber: 1
     }
 
     componentDidMount() {
         this.loadData();
+        window.addEventListener('scroll', this.onScroll);
+    }
+
+    onScroll = () => {
+        // 스크롤의 끝
+        if(document.documentElement.scrollTop + document.documentElement.clientHeight
+            === document.documentElement.scrollHeight) {
+                if (this.state.pageNumber > 4) {
+                    return;
+                }
+
+                const apiUrl = `dummy/webtoon_list-${this.state.pageNumber}.json`;
+                axios.get(apiUrl)
+                .then(data => {
+                    const newList = this.state.webtoonList.concat(data.data.webtoonList);
+                    this.setState({
+                        webtoonList : newList,
+                        pageNumber: this.state.pageNumber + 1
+                    });
+                })
+                .catch(error => { console.log(error); }); 
+            }
     }
 
     loadData() {
-        const apiUrl = 'dummy/webtoon_list.json';
+        const apiUrl = `dummy/webtoon_list-${this.state.pageNumber}.json`;
         axios.get(apiUrl)
         .then(data => {
             this.setState({
-                webtoonList : data.data.webtoonList
+                webtoonList : data.data.webtoonList,
+                pageNumber: this.state.pageNumber+1
             });
         })
         .catch(error => { console.log(error); });
