@@ -8,7 +8,7 @@ const WebtoonList = (props) => {
                     return (
                         <li key={index}>
                             <div className='item-webtoon'>
-                                <img src={item.thumbnail} className='img-webtoon' alt={item.title}/>
+                                <img data-src={item.thumbnail} className='img-webtoon lazy' />
                                 <div className="link-webtoon">
                                     <div className='info-webtoon'>
                                         <strong className='tit-webtoon'>
